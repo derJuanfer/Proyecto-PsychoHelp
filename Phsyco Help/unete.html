@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unete</title>
+</head>
+<body>
+    <form action="action_page.php">
+        <div class="container">
+            <h1>Unete</h1>
+            <p>Complete el formulario para crear una cuenta</p>
+            <hr>
+
+            <fieldset>
+                <div>
+                    <label for="name">Nombre</label>
+                    <input type="text" placeholder="Introducir Nombre" name="name" id="name" required>
+                    <label for="surname">Apellido</label>
+                    <input type="text" placeholder="Introducir Apellido" name="surname" id="surname" required>
+                </div>
+            
+                <label for="genero">Género</label>
+                <select name="genero">
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="na" selected>N/A</option>
+                </select>
+            
+                <label for="email">Correo</label>
+                <input type="email" placeholder="Introducir Correo" name="email" id="email" required>
+            
+                <div>
+                    <label for="psw">Contraseña</label>
+                    <input type="password" placeholder="Introducir Contraseña" name="psw" id="psw" required>
+                </div>
+                <div>
+                    <label for="psw-repeat">Repetir Contraseña</label>
+                    <input type="password" placeholder="Repetir Contraseña" name="psw-repeat" id="psw-repeat" required>
+                </div>
+            </fieldset>
+            <hr>
+            
+            <p>Al crear una cuenta aceptas nuestros <a href="#">Terminos y Condiciones</a>.</p>
+            <button type="submit" class="registerbtn">Registrar</button>
+            </div>
+            <div class="container signin">
+                <p>¿Ya tienes una cuenta? <a href="/sign-in.html">Sign in</a>.</p>
+            </div>
+            </form>
+            </body>
+            
+            </html>
