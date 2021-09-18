@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyscoHelp</title>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+
+<body>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            max-width: 1400px;
+            min-width: 375px;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 0;
+            margin-bottom: 0;
+            color: #222222;
+        }
+
+        .header-section {
+            margin-bottom: 100px;
+        }
+
+        .header-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            text-align: center;
+
+        }
+
+        .site-title {
+            width: 30%;
+        }
+
+        .site-nav {
+            width: 40%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .site-nav>a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .site-nav>a:hover {
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .logo-container {
+            width: 30%;
+        }
+
+        .logo-container__site-logo {
+            height: 80px;
+        }
+
+        .banner {
+            width: 100%;
+        }
+
+        .banner>img {
+            width: 100%;
+            height: 400px;
+            max-width: 1400px;
+            object-fit: cover;
+        }
+
+        .services-section,
+        .seccion-noticias,
+        .seccion-equipo {
+            display: flex;
+            margin-bottom: 100px;
+        }
+
+        .seccion-noticias,
+        .header-container {
+            background-color: #f7f7f7
+        }
+
+        .seccion-noticias {
+            flex-wrap: wrap;
+        }
+
+        .services-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .news-info {
+            width: 50%;
+            padding: 20px;
+        }
+
+        .news-header {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .news-info__title {
+            align-self: center;
+        }
+
+        .seccion-pie {
+            background-color: #25294f;
+            height: 200px;
+            display: flex;
+            color: white;
+            justify-content: space-evenly;
+        }
+
+        .services-info__imagen {
+            border-radius: 50%;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .team-info {
+            width: 25%;
+            padding: 15px;
+        }
+
+        .team-info__imagen {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .divp {
+            background-color: #E5EBFF;
+            margin-left: 25%;
+            margin-block-end: 99px;
+            margin-right: 25%;
+            padding: 60px;
+            text-align:unset;
+            border-radius: 40px;
+            color: #474747;
+        }
+        .img{
+            float: right;
+            margin-left: 20px;
+            width: 250px;
+            height: 300px;
+        }
+    </style>
+
+    <div id="app">
+        <div class="header-section">
+            <div class="header-container" style="background-color: #00C4D0">
+
+                <!-- <div class="site-title"> -->
+                <h1 style="color: white">{{ mayusculasTexto }}</h1>
+                <!-- </div> -->
+
+                <!-- Inicio menú navegación -->
+                <ul class="site-nav">
+                    <a href="#" style="color: white">Inicio</a>
+                    <a href="login.html" style="color: white">Unete</a>
+                    <!-- <a href="#news"></a> -->
+                    <!-- <a href="#team">Nuestro equipo</a> -->
+                </ul>
+            </div>
+        </div>
+        <div > 
+            <!-- <h2 class="bg-dark" :class="colorCantidad">
+                {{ mensaje }}
+            </h2>
+            <a v-bind:href="enlace">ir al enlace</a>
+            <a :href="enlace">ir al enlace</a>
+            <h2 v-if="estado">Cuenta Activa</h2>
+            <h2 v-else>Cuenta Desactivada</h2>
+
+            <h2 v-if="cantidad > 500">Cantidad: {{cantidad}}</h2>
+            <h2 v-else-if="cantidad <= 500 && cantidad > 0">
+                Cantidad:
+                <span style="color:red">{{cantidad}}</span>
+            </h2>
+            <h2 v-else>Sin Cantidad {{cantidad}}</h2> -->
+            <h2 class="divp">
+                <img src="img/Tyni.png" alt="Tortuga" class="img">
+                <p style="align-content: center">{{ mensaje }}</p>
+                <!-- <button v-on:click="enlace1">{{ mensaje1 }}</button> -->
+            </h2>
+            <!-- <ul>
+                <li v-for="(item, index) in servicios" :key="index">{{index + 1}} - {{item}}</li>
+            </ul>
+
+            <button v-on:click="agregarSaldo">Agregar Saldo</button>
+            <button @click="agregarSaldo">Agregar Saldo</button>
+            <button @click="disminuirSaldo(100)" :disabled="desactivar">Disminuir Saldo</button> -->
+        </div>
+
+        <!-- <footer-banco></footer-banco>
+        <footer-banco />
+         -->
+
+        <footer-banco />
+
+
+    </div>
+
+
+    <script src="main.js"></script>
+    <script src="components/Footer.js"></script>
+    <script src="style.css"></script>
+    <script>
+        const mountedApp = app.mount('#app');
+    </script>
+</body>
+
+
+</html>
