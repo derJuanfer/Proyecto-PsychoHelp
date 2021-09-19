@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PyscoHelp</title>
+    <title>PyschoHelp</title>
 
     <script src="https://unpkg.com/vue@next"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -181,7 +181,7 @@
                 <!-- Inicio menú navegación -->
                 <ul class="site-nav">
                     <a href="index.html" style="color: white">Inicio</a>
-                    <a href="login.html" style="color: white">Unete</a>
+                    <a href="login.html" style="color: white">Únete</a>
                     <!-- <a href="#news"></a> -->
                     <!-- <a href="#team">Nuestro equipo</a> -->
                 </ul>
@@ -195,7 +195,6 @@
             <a :href="enlace">ir al enlace</a>
             <h2 v-if="estado">Cuenta Activa</h2>
             <h2 v-else>Cuenta Desactivada</h2>
-
             <h2 v-if="cantidad > 500">Cantidad: {{cantidad}}</h2>
             <h2 v-else-if="cantidad <= 500 && cantidad > 0">
                 Cantidad:
@@ -240,12 +239,20 @@
                 <br>
                 <button onclick="window.location.href='#'" class="button">{{registrar}}</button>
             </p>
+						<p style= "font-style: italic; font-size : 15px">
+								* Te pedimos este dato únicamente con fines estadísticos y para poder brindarte un apoyo más personalizado.
+						</p>
+						
+						<p style= "text-align: center; font-size : 15px">
+							<br>
+							<br>
+              <a href="registro_asesor.html">¿Eres un asesor psicológico? Registrate aquí.</a>
+						</p>
                 <!-- <button v-on:click="enlace1">{{ mensaje1 }}</button> -->
             </h2>
             <!-- <ul>
                 <li v-for="(item, index) in servicios" :key="index">{{index + 1}} - {{item}}</li>
             </ul>
-
             <button v-on:click="agregarSaldo">Agregar Saldo</button>
             <button @click="agregarSaldo">Agregar Saldo</button>
             <button @click="disminuirSaldo(100)" :disabled="desactivar">Disminuir Saldo</button> -->

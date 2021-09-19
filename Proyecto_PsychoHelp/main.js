@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data() {
         return {
-            titulo: 'PyscoHelp',
+            titulo: 'PyschoHelp',
             inicio: 'index.html',
             unete: 'unete.html',
             cantidad: 1000,
@@ -9,19 +9,20 @@ const app = Vue.createApp({
             estado: false,
             servicios: ['transferencias', 'pagos', 'giros', 'cheques'],
             desactivar: false,
-            mensaje: 'PsychoHelp, proyecto sobre salud mental que busca ayudar a los usuarios con sus problemas de salud mental. ',
-            mensaje1: '¿En que puedo ayudarte?',
+            mensaje: 'PsychoHelp, es un proyecto que busca ayudar a los usuarios con sus problemas de salud mental. ',
+            mensaje1: '¿En qué puedo ayudarte?',
             enlace1: 'unete.html',
             n:'Nombre: ',
             a:'Apellido',
-            email:'Correo Electronico',
-            sexo:'Sexo Biologico: *',
+            email:'Correo Electrónico',
+            sexo:'Sexo Biológico: *',
             usuario:'Usuario: ',
             contraseña:'Contraseña: ',
             inicio:'Iniciar sesión',
             registrar: 'Registrarse',
             fecha:'Fecha de Nacimiento:',
             re_contraseña:'Repetir contraseña:',
+						cod_asesor:'Código único:',
         }
     },
     methods: {
