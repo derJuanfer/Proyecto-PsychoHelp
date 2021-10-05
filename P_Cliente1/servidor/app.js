@@ -29,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //Rutas
 app.use('/api', require('./routes/usuario_basico'));
 app.use('/api', require('./routes/usuario_asesor'));
+app.use('/api', require('./routes/crear_foro'));
 
 //Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');
