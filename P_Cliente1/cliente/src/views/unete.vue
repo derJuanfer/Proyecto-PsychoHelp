@@ -37,22 +37,21 @@ export default {
     //
   }),
   methods: {
-    llamar(){
-      this.$router.push('/unete')
+    llamar() {
+      this.$router.push("/unete");
     },
-    llamarRegistrarse(){
-      this.$router.push('/registrarse')
+    llamarRegistrarse() {
+      this.$router.push("/registrarse");
     },
-    llamarRegistroAcesor(){
-      this.$router.push('/registro_asesor')
-    }
+    llamarRegistroAcesor() {
+      this.$router.push("/registro_asesor");
+    },
   },
 };
 </script>
 
 
 <style lang="scss">
-
 #divp {
   background-color: #e5ebff;
   margin-left: 25%;
