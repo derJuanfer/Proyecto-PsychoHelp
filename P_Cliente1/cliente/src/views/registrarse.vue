@@ -29,14 +29,38 @@
           @change="$v.select.$touch()"
           @blur="$v.select.$touch()"
         ></v-select>
-        <v-text-field
-          v-model="fecha"
-          :error-messages="emailErrors"
-          label="Fecha de Nacimiento"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
+        <v-row>
+          <v-col cols="12" sm="6" md="6">
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              :return-value.sync="date"
+              transition="scale-transition"
+              offset-y
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  label="Fecha de Nacimiento"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker v-model="date" no-title scrollable>
+                <v-spacer></v-spacer>
+                <v-btn text color="primary" @click="menu = false">
+                  Cancel
+                </v-btn>
+                <v-btn text color="primary" @click="$refs.menu.save(date)">
+                  OK
+                </v-btn>
+              </v-date-picker>
+            </v-menu>
+          </v-col>
+        </v-row>
         <v-text-field
           v-model="usuario"
           :error-messages="emailErrors"
@@ -83,18 +107,17 @@ export default {
     //
   }),
   methods: {
-    llamarRegistrarse(){
-      this.$router.push('/unete')
+    llamarRegistrarse() {
+      this.$router.push("/unete");
     },
-    llamarForo(){
-      this.$router.push('/foro')
-    }
+    llamarForo() {
+      this.$router.push("/foro");
+    },
   },
 };
 </script>
 
 <style lang="scss">
-
 #divp {
   background-color: #e5ebff;
   margin-left: 25%;
