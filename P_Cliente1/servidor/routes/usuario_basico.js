@@ -18,5 +18,14 @@ router.post('/nuevo_usuario', async(req, res)=>{
   }
 });
 
+router.get('/nuevo_usuario', async(req, res)=>{
+  try {
+   const usuarioBD = await usuario_basico.find({})
+   res.json(usuarioBD);
+  } catch (error) {
+    console.log(error);
+  }
+  });
+
 //Exporta la configuración de express
 module.exports = router;

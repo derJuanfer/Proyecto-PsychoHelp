@@ -5,7 +5,7 @@ import path from 'path';
 
 //Habilitar express
 const app = express();
-//prueba
+
 //Conexión a base de datos
 const mongoose = require('mongoose');
 const uri = 'mongodb://localhost:27017/P_PH';
