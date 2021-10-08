@@ -156,7 +156,6 @@
 </script>
 
 <style lang="scss">
-
 #divp {
   background-color: #e5ebff;
   margin-left: 25%;
