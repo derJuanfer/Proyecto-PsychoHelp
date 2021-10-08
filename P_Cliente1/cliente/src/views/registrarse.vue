@@ -1,120 +1,158 @@
 <template>
   <v-container>
-    <v-container>
-      <form id="divp">
-        <h2>Registrarse</h2>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="20"
-          label="Nombre y Apellido"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="Correo Electronico"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-select
-          v-model="select"
-          :items="sexo"
-          :error-messages="selectErrors"
-          label="Sexo"
-          required
-          @change="$v.select.$touch()"
-          @blur="$v.select.$touch()"
-        ></v-select>
-        <v-row>
-          <v-col cols="12" sm="6" md="6">
-            <v-menu
-              ref="menu"
-              v-model="menu"
-              :close-on-content-click="false"
-              :return-value.sync="date"
-              transition="scale-transition"
-              offset-y
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="date"
-                  label="Fecha de Nacimiento"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker v-model="date" no-title scrollable>
-                <v-spacer></v-spacer>
-                <v-btn text color="primary" @click="menu = false">
-                  Cancel
-                </v-btn>
-                <v-btn text color="primary" @click="$refs.menu.save(date)">
-                  OK
-                </v-btn>
-              </v-date-picker>
-            </v-menu>
-          </v-col>
-        </v-row>
-        <v-text-field
-          v-model="usuario"
-          :error-messages="emailErrors"
-          label="Usuario"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="contraseña"
-          :error-messages="emailErrors"
-          label="Contraseña"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="re_contraseña"
-          :error-messages="emailErrors"
-          label="Repetir Contraseña"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @change="$v.checkbox.$touch()"
-          @blur="$v.checkbox.$touch()"
-        ></v-checkbox>
-
-        <v-btn class="mr-4" @click="llamarRegistrarse()"> Registrarse </v-btn>
-      </form>
-    </v-container>
+    <form id="divp" @submit.prevent="crearUsuario()">
+      <h2>Registrarse</h2>
+      <v-text-field
+        v-model="usuario.nombres"
+        :counter="30"
+        :rules="[rules.required]"
+        label="Nombres"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="usuario.apellidos"
+        :counter="30"
+        :rules="[rules.required]"
+        label="Apellidos"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="usuario.usuario"
+        :counter="20"
+        :rules="[rules.required]"
+        label="Usuario"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="usuario.email"
+        :rules="[rules.required, rules.email]"
+        label="Correo Electronico"
+        required
+      ></v-text-field>
+      <v-select
+        v-model="usuario.sexo"
+        :items="sexo"
+        :rules="[rules.required]"
+        label="Sexo biológico"
+        required
+      ></v-select>
+      <template>
+        <div>
+          <v-menu
+            ref="menu"
+            v-model="menu"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="usuario.fecha_nacimiento"
+                :rules="[rules.required]"
+                label="Fecha de nacimiento"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="usuario.fecha_nacimiento"
+              :active-picker.sync="activePicker"
+              :max="(new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10)"
+              min="1920-01-01"
+              @change="save"
+            ></v-date-picker>
+          </v-menu>
+        </div>
+      </template>
+      <v-text-field
+        v-model="usuario.contraseña"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.password, rules.length(8)]"
+        :type="show1 ? 'text' : 'password'"
+        label="Contraseña"
+        required
+        @click:append="show1 = !show1"
+      ></v-text-field>
+      <v-text-field
+        v-model="re_pass"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, re_passRule]"
+        :type="show1 ? 'text' : 'password'"
+        label="Repetir Contraseña"
+        required
+        @click:append="show1 = !show1"
+      ></v-text-field>
+      <v-checkbox
+        label="He leído y acepto los términos y condiciones."
+        required
+      ></v-checkbox>
+      <v-btn color="white" elevation="2" type="submit">Registrarse</v-btn>
+    </form>
   </v-container>
 </template>
-<script>
-export default {
-  name: "App",
 
-  data: () => ({
-    //
-  }),
-  methods: {
-    llamarRegistrarse() {
-      this.$router.push("/unete");
+<script>
+  export default{
+    data (){
+      return{
+        usuario:{
+          nombres: "",
+          apellidos: "",
+          email: "",
+          usuario: "",
+          fecha_nacimiento: "",
+          contraseña: ""
+        },
+        watch: {
+          menu (val) {
+            val && setTimeout(() => (this.activePicker = 'YEAR'))
+          }
+        },
+        sexo: ["Masculino", "Femenino", "Otro"],
+        activePicker: null,
+        date: null,
+        menu: false,
+        password: undefined,
+        show1: false,
+        rules: {
+          email: v => !!(v || '').match(/@/) || 'Por favor, ingrese un correo válido.',
+          length: len => v => (v || '').length >= len || `La contraseña debe tener al menos ${len} caracteres.`,
+          password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/) || 'La contreña debe incluir al menos una mayúscula y un número.',
+          required: v => !!v || 'Campo obligatorio.',
+        },
+      }
     },
-    llamarForo() {
-      this.$router.push("/foro");
+    methods: {
+      save (date) {
+        this.$refs.menu.save(date)
+      },
+      crearUsuario(){
+        console.log(this.usuario)
+        this.axios.post('nuevo_usuario', this.usuario)
+        .then(res => {
+          this.usuario.nombres = ""
+          this.usuario.apellidos = ""
+          this.usuario.usuario = ""
+          this.usuario.email = ""
+          this.usuario.sexo = ""
+          this.usuario.fecha_nacimiento = ""
+          this.showAlert()
+          console.log(res.data)
+        })
+        .catch(e => {
+          console.log(e.response);
+        })
+      }
     },
-  },
-};
+    computed: {
+      re_passRule() {
+        return () => (this.usuario.contraseña === this.re_pass) || 'Las contraseñas no coinciden.'
+      }
+    }
+  }
 </script>
 
 <style lang="scss">
@@ -150,4 +188,3 @@ export default {
   height: 30px;
 }
 </style>
-
