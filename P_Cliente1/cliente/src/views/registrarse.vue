@@ -78,18 +78,20 @@
       ></v-text-field>
       <v-text-field
         v-model="re_pass"
-        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
         :rules="[rules.required, re_passRule]"
-        :type="show1 ? 'text' : 'password'"
+        :type="show2 ? 'text' : 'password'"
         label="Repetir Contraseña"
         required
-        @click:append="show1 = !show1"
+        @click:append="show2 = !show2"
       ></v-text-field>
       <v-checkbox
         label="He leído y acepto los términos y condiciones."
         required
       ></v-checkbox>
-      <v-btn color="white" elevation="2" type="submit">Registrarse</v-btn>
+      <v-btn class="mb-5" color="white" elevation="2" type="submit">Registrarse</v-btn>
+      <br>
+      <a @click="llamarRegistroAsesor()">¿Eres un asesor psicológico? Registrate aquí.</a>
     </form>
   </v-container>
 </template>
@@ -117,6 +119,7 @@
         menu: false,
         password: undefined,
         show1: false,
+        show2: false,
         rules: {
           email: v => !!(v || '').match(/@/) || 'Por favor, ingrese un correo válido.',
           length: len => v => (v || '').length >= len || `La contraseña debe tener al menos ${len} caracteres.`,
@@ -145,7 +148,10 @@
         .catch(e => {
           console.log(e.response);
         })
-      }
+      },
+      llamarRegistroAsesor() {
+        this.$router.push("/registro_asesor");
+      },
     },
     computed: {
       re_passRule() {
@@ -158,10 +164,10 @@
 <style lang="scss">
 #divp {
   background-color: #e5ebff;
-  margin-left: 25%;
+  margin-left: 20%;
   margin-block-start: 20px;
   margin-block-end: 20px;
-  margin-right: 25%;
+  margin-right: 20%;
   padding: 60px;
   text-align: unset;
   border-radius: 40px;

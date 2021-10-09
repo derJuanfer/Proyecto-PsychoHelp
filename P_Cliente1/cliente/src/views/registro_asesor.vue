@@ -70,9 +70,9 @@
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data(){
+
+  },
   methods: {
     llamarRegistrarse(){
       this.$router.push('/unete')
@@ -88,10 +88,10 @@ export default {
 
 #divp {
   background-color: #e5ebff;
-  margin-left: 25%;
+  margin-left: 20%;
   margin-block-start: 20px;
   margin-block-end: 20px;
-  margin-right: 25%;
+  margin-right: 20%;
   padding: 60px;
   text-align: unset;
   border-radius: 40px;
@@ -118,4 +118,3 @@ export default {
   height: 30px;
 }
 </style>
-

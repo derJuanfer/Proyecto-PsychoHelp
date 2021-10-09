@@ -1,30 +1,27 @@
 <template>
   <v-app>
     <v-app-bar app color="#00C4D0" dark>
-      <div class="d-flex align-center">
+      <div class="d-flex justify-end">
         <v-img
-          alt="Vuetify Logo"
+          alt="Logo Tiny"
           class="shrink mr-2"
           contain
           src="./assets/cabeza_Tyni.png"
           transition="scale-transition"
-          width="65px"
+          width="55px"
         />
         <span class="mr-2" style="font-size: 40px">PyschoHelp</span>
       </div>
       <v-spacer></v-spacer>
-      <v-btn href="/" text>
-        <span class="mr-2" style="font-size: 20px">Inicio</span>
+      <v-btn class="mx-1" href="/" text>
+        <span style="font-size: 20px">Inicio</span>
       </v-btn>
-      <v-spacer>
-        <v-btn @click="llamarForo()">
-          <span class="mr-2" style="font-size: 20px">Foro</span>
-        </v-btn>
-      </v-spacer>
-
-      <v-btn @click="llamarUnete()">
-        <span class="mr-2" style="font-size: 20px">Únete</span>
-        <v-icon>mdi-open-in-new</v-icon>
+      <v-btn class="mx-1" @click="llamarForo()" text>
+        <span style="font-size: 20px">Foro</span>
+      </v-btn>
+      <v-btn class="mx-1"  @click="llamarUnete()">
+        <span style="font-size: 20px">Únete</span>
+        <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -46,9 +43,9 @@
 export default {
   name: "App",
 
-  data: () => ({
-    //
-  }),
+  data (){
+    
+  },
   methods: {
     llamarUnete() {
       this.$router.push("/unete");

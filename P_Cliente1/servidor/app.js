@@ -8,7 +8,7 @@ const app = express();
 
 //Conexión a base de datos
 const mongoose = require('mongoose');
-const uri = 'mongodb://localhost:27017/P_PH';
+const uri = 'mongodb+srv://AdminAccess:adminph5@psychohelp.fhecd.mongodb.net/P_PH?retryWrites=true&w=majority';
 const options = {useNewUrlParser: true, useUnifiedTopology: true};
 
 mongoose.connect(uri, options).then(
