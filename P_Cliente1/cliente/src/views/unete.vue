@@ -1,40 +1,36 @@
 <template>
   <v-container>
-    <v-container>
-      <form id="divp">
-        <h2>Iniciar sesión</h2>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="20"
-          label="Usuario"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="Contraseña"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-btn class="mr-4" @click="no"> Iniciar sesión </v-btn>
-        <v-btn @click="llamarRegistrarse()"> Registrarse </v-btn>
-        <br>
-        <br>
-        <a @click="llamarRegistroAcesor()">¿Eres un asesor psicológico? Registrate aquí.</a>
-      </form>
-    </v-container>
+    <form id="divp" @submit.prevent="iniciarSesion()">
+      <h2>Iniciar sesión</h2>
+      <v-text-field
+      v-model="usuario"
+      label="Usuario"
+      required
+      ></v-text-field>
+      <v-text-field
+      v-model="contraseña"
+      label="Contraseña"
+      required
+      ></v-text-field>
+      <p v-if="error" class="error">Has introducido mal el usuario o la contraseña.</p>
+      <v-btn class="my-2" elevation="2" type="submit"> Iniciar sesión </v-btn>
+      <div class="mt-10 mb-2 font-weight-bold">
+        ¿Aún no tienes una cuenta?
+      </div>
+      <v-btn @click="llamarRegistrarse()"> Registrarse </v-btn>
+    </form>
   </v-container>
 </template>
+
 <script>
 export default {
   name: "App",
 
   data: () => ({
-    //
+    usuario: "",
+    contraseña: "",
+    error: false,
+    succes: false
   }),
   methods: {
     llamar() {
@@ -43,9 +39,10 @@ export default {
     llamarRegistrarse() {
       this.$router.push("/registrarse");
     },
-    llamarRegistroAcesor() {
-      this.$router.push("/registro_asesor");
-    },
+    inciarSesion: async function(){
+      console.log(this.usuario)
+      console.log(this.contraseña)
+    }
   },
 };
 </script>
@@ -54,10 +51,10 @@ export default {
 <style lang="scss">
 #divp {
   background-color: #e5ebff;
-  margin-left: 25%;
+  margin-left: 20%;
   margin-block-start: 20px;
   margin-block-end: 20px;
-  margin-right: 25%;
+  margin-right: 20%;
   padding: 60px;
   text-align: unset;
   border-radius: 40px;
@@ -84,4 +81,3 @@ export default {
   height: 30px;
 }
 </style>
-
