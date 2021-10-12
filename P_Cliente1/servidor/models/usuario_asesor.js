@@ -10,6 +10,10 @@ const asesorSchema = new Schema({
     type: String,
     required: [true, 'Campo obligatorio.']
   },
+  usuario: {
+    type: String,
+    required: [true, 'Campo obligatorio.']
+  },
   email: {
     type: String,
     required: [true, 'Campo obligatorio.']

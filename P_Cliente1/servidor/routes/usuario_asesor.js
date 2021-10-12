@@ -18,5 +18,14 @@ router.post('/nuevo_asesor', async(req, res)=>{
   }
 });
 
+router.get('/nuevo_asesor', async(req, res)=>{
+  try {
+   const asesorBD = await usuario_asesor.find({})
+   res.json(asesorBD);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 //Exporta la configuración de express
 module.exports = router;

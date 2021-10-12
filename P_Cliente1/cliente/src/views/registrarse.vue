@@ -103,8 +103,9 @@
         usuario:{
           nombres: "",
           apellidos: "",
-          email: "",
           usuario: "",
+          email: "",
+          sexo: "",
           fecha_nacimiento: "",
           contraseña: ""
         },
@@ -133,7 +134,6 @@
         this.$refs.menu.save(date)
       },
       crearUsuario(){
-        console.log(this.usuario)
         this.axios.post('nuevo_usuario', this.usuario)
         .then(res => {
           this.usuario.nombres = ""
@@ -142,12 +142,14 @@
           this.usuario.email = ""
           this.usuario.sexo = ""
           this.usuario.fecha_nacimiento = ""
+          this.usuario.contraseña = ""
           this.showAlert()
           console.log(res.data)
         })
         .catch(e => {
           console.log(e.response);
         })
+        this.$router.push("/unete")
       },
       llamarRegistroAsesor() {
         this.$router.push("/registro_asesor");
@@ -157,7 +159,14 @@
       re_passRule() {
         return () => (this.usuario.contraseña === this.re_pass) || 'Las contraseñas no coinciden.'
       }
-    }
+    },
+    beforeCreate(){
+      var auth = window.localStorage.getItem("auth")
+
+      if(auth === "ok"){
+        this.$router.push("/perfil")
+      }
+    },
   }
 </script>
 

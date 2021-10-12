@@ -25,7 +25,17 @@ router.get('/nuevo_usuario', async(req, res)=>{
   } catch (error) {
     console.log(error);
   }
-  });
+});
+
+router.get('/nuevo_usuario/:usuario', async(req, res) => {
+  const usuario = req.params.usuario;
+  try{
+    const usuarioBD = await usuario_basico.findOne({usuario});
+    res.json(usuarioBD);
+  } catch (error){
+    return res.status(400).json({mensaje: 'Ocurrió un error', error})
+  }
+});
 
 //Exporta la configuración de express
 module.exports = router;

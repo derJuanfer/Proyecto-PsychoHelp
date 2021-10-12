@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <form id="divp" @submit.prevent="buscarUsuario()">
+    <form id="divp" @submit.prevent="buscarAsesor()">
       <h2>Iniciar sesión</h2>
       <v-text-field
         v-model="form.usuario"
@@ -15,14 +15,16 @@
         required
         @click:append="show1 = !show1"
       ></v-text-field>
-      <p v-if="error" class="error">Has introducido mal el usuario o la contraseña.</p>
+      <v-text-field
+        v-model="form.codigo_unico"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :type="show2 ? 'text' : 'password'"
+        label="Código único de acceso"
+        required
+        @click:append="show2 = !show2"
+      ></v-text-field>
+      <p v-if="error" class="error">Datos ingresados erróneos.</p>
       <v-btn class="my-2" elevation="2" type="submit"> Iniciar sesión </v-btn>
-      <div class="mt-10 mb-2 font-weight-bold">
-        ¿Aún no tienes una cuenta?
-      </div>
-      <v-btn class="mb-5" @click="llamarRegistrarse()"> Registrarse </v-btn>
-      <br>
-      <a @click="uneteAsesor()">¿Eres un asesor psicológico? Inicia sesión aquí.</a>
     </form>
   </v-container>
 </template>
@@ -35,11 +37,13 @@ export default {
     form:{
       usuario: "",
       contraseña: "",
+      codigo_unico: ""
     },
     usuario: [],
     error: false,
     succes: false,
     show1: false,
+    show2: false
   }),
   methods: {
     llamar() {
@@ -48,23 +52,21 @@ export default {
     llamarRegistrarse() {
       this.$router.push("/registrarse");
     },
-    uneteAsesor(){
-      this.$router.push("/unete_asesor");
-    },
-    buscarUsuario(){
+    buscarAsesor(){
       var logueado = false
-      this.axios.get("nuevo_usuario") .then(res => {
-        this.usuario = res.data
+      this.axios.get("nuevo_asesor") .then(res => {
+        this.asesor = res.data
 
-        this.usuario.forEach((value, index) => {
+        this.asesor.forEach((value, index) => {
           if(this.form.usuario === value.usuario){
             console.log("Usuario encontrado.");
 
-            if(this.form.contraseña === value.contraseña){
+            if(this.form.contraseña === value.contraseña && this.form.codigo_unico === value.codigo_unico){
               console.log("Contraseña correcta.");
               logueado = true
 
               window.localStorage.setItem("auth", "ok")
+              window.localStorage.setItem("asesor", "yes")
               window.localStorage.setItem("user", this.form.usuario)
 
               this.$router.go()
