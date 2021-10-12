@@ -18,5 +18,14 @@ router.post('/nuevo_foro', async(req, res)=>{
   }
 });
 
+router.get('/nuevo_foro', async(req, res)=>{
+  try {
+   const forosBD = await crear_foro.find({})
+   res.json(forosBD);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 //Exporta la configuración de express
 module.exports = router;

@@ -189,8 +189,8 @@
           <h2 class="my-5 text-left">Juan Fernando Quintero</h2>
           <v-divider style = "margin-left: 5%"></v-divider>
           <p class="ma-5 text-left" style="font-weight: bold">Me llamo Juan Fernando Quintero, tengo 21 años,
-            vivo en la ciudad de Cali, soy estudiante de física en la Universidad del Valle.
-            Pero trabajo como músico y gestor de proyectos sociales y culturales, sobre todo enfocados a la
+            vivo en la ciudad de Cali. Soy estudiante de física en la Universidad del Valle,
+            pero trabajo como músico y gestor de proyectos sociales y culturales, sobre todo enfocados a la
             recuperación de espacios para los jóvenes y niños. Ésta idea de proyecto significa mucho para mí,
             pues fue planteado como un centro de ayuda para cualquier persona que no tuviera la oportunidad
             de acceder a un servicio médico psicológico, siendo esta plataforma un espacio seguro para dialogar,

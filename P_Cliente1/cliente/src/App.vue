@@ -139,6 +139,7 @@ export default {
     cerrarSesion(){
       window.localStorage.removeItem("auth")
       window.localStorage.removeItem("user")
+      window.localStorage.removeItem("asesor")
       this.$router.go()
       this.$router.push({path: "/"})
     }
