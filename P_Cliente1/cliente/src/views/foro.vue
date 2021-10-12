@@ -1,30 +1,12 @@
 <template>
   <v-container>
-    <form id="divp">
-      <v-card>
-        <v-toolbar flat color="#00C4D0" dark>
-          <v-toolbar-title>Foro de dudas</v-toolbar-title>
-        </v-toolbar>
-
-        <v-card-text>
-          <v-text-field filled label="Titulo" value=""></v-text-field>
-
-          <v-textarea filled label="Texto" value=""></v-textarea>
-
-          <v-divider class="my-2"></v-divider>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="success" depressed> Añadir </v-btn>
-        </v-card-actions>
-      </v-card>
-    </form>
-    <br />
+    <h1 class="my-5">Foro de discusión</h1>
+    <v-divider style = "margin-left: 1%; margin-right: 1%"></v-divider>
     <v-card class="overflow-hidden" color="#9ad5d8" id="v-card">
       <v-toolbar flat color="white">
         <v-icon>mdi-account</v-icon>
         <v-toolbar-title class="font-weight-light">
-          User Profile
+          {{ this.user }}
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn color="success">
@@ -35,13 +17,18 @@
         </v-btn>
       </v-toolbar>
       <v-card-text>
-        <v-text-field color="black" label="Titulo"></v-text-field>
-        <v-text-field color="black" label="Descripción"></v-text-field>
+        <v-text-field
+          color="black"
+          label="Titulo"
+          ></v-text-field>
+        <v-text-field
+        color="black"
+        label="Descripción"></v-text-field>
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="success" @click="save"> Guardar </v-btn>
+        <v-btn color="success" @click="crearForo()"> Publicar </v-btn>
         <div class="text-center" style="margin-right: 10%; padding: 5px">
           <v-bottom-sheet v-model="sheet" inset>
             <template v-slot:activator="{ on, attrs }">
@@ -61,14 +48,39 @@
           </v-bottom-sheet>
         </div>
       </v-card-actions>
-      <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
+      <!-- <v-snackbar v-model="hasSaved" :timeout="2000" absolute bottom left>
         Tu publicación ha sido actualizada
-      </v-snackbar>
+      </v-snackbar> -->
     </v-card>
   </v-container>
 </template>
 
-
+<script>
+  export default{
+    data (){
+      return{
+        foro:{
+          titulo: "",
+          texto: "",
+          usuario: ""
+        },
+        user: window.localStorage.getItem("user")
+      }
+    },
+    methods: {
+      crearUsuario(){
+        this.axios.post('nuevo_foro', this.foro)
+        .then(res => {
+          this.showAlert()
+          console.log(res.data)
+        })
+        .catch(e => {
+          console.log(e.response);
+        })
+      },
+    },
+  }
+</script>
 
 
 <style lang="scss">
