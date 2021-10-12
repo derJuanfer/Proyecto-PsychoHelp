@@ -1,77 +1,96 @@
 <template>
   <v-container>
-    <v-container>
-      <form id="divp">
-        <h2>Registrarse</h2>
-        <v-text-field
-          v-model="name"
-          :error-messages="nameErrors"
-          :counter="20"
-          label="Nombre y Apellido"
-          required
-          @input="$v.name.$touch()"
-          @blur="$v.name.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="email"
-          :error-messages="emailErrors"
-          label="Correo Electronico"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="usuario"
-          :error-messages="emailErrors"
-          label="Usuario"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="contraseña"
-          :error-messages="emailErrors"
-          label="Contraseña"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="re_contraseña"
-          :error-messages="emailErrors"
-          label="Repetir Contraseña"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-text-field
-          v-model="codigo"
-          :error-messages="emailErrors"
-          label="Codigo Unico"
-          required
-          @input="$v.email.$touch()"
-          @blur="$v.email.$touch()"
-        ></v-text-field>
-        <v-checkbox
-          v-model="checkbox"
-          :error-messages="checkboxErrors"
-          label="Do you agree?"
-          required
-          @change="$v.checkbox.$touch()"
-          @blur="$v.checkbox.$touch()"
-        ></v-checkbox>
+    <form id="divp" @submit.prevent="crearAsesor()">
+      <h2>Registrarse</h2>
+      <v-text-field
+        v-model="asesor.nombres"
+        :counter="30"
+        :rules="[rules.required]"
+        label="Nombres"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.apellidos"
+        :counter="30"
+        :rules="[rules.required]"
+        label="Apellidos"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.usuario"
+        :counter="30"
+        :rules="[rules.required]"
+        label="Usuario"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.email"
+        :rules="[rules.required, rules.email]"
+        label="Correo Electronico"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.contraseña"
+        :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, rules.password, rules.length(8)]"
+        :type="show1 ? 'text' : 'password'"
+        label="Contraseña"
+        required
+        @click:append="show1 = !show1"
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.re_pass"
+        :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required, re_passRule]"
+        :type="show2 ? 'text' : 'password'"
+        label="Repetir Contraseña"
+        required
+        @click:append="show2 = !show2"
+      ></v-text-field>
+      <v-text-field
+        v-model="asesor.codigo_unico"
+        :append-icon="show3 ? 'mdi-eye' : 'mdi-eye-off'"
+        :rules="[rules.required]"
+        :type="show3 ? 'text' : 'password'"
+        label="Código único de acceso"
+        required
+        @click:append="show3 = !show3"
+      ></v-text-field>
+      <v-checkbox
+        label="He leído y acepto los términos y condiciones."
+        required
+      ></v-checkbox>
 
-        <v-btn class="mr-4" @click="llamarRegistrarse()"> Registrarse </v-btn>
-      </form>
-    </v-container>
+      <v-btn class="mb-5" color="white" elevation="2" type="submit">Registrarse</v-btn>
+    </form>
   </v-container>
 </template>
+
 <script>
 export default {
   name: "App",
-
   data(){
-
+    return{
+      asesor:{
+        nombres: "",
+        apellidos: "",
+        usuario: "",
+        email: "",
+        contraseña: "",
+        codigo_unico: "",
+      },
+      re_pass: "",
+      password: undefined,
+      show1: false,
+      show2: false,
+      show3: false,
+      rules: {
+        email: v => !!(v || '').match(/@/) || 'Por favor, ingrese un correo válido.',
+        length: len => v => (v || '').length >= len || `La contraseña debe tener al menos ${len} caracteres.`,
+        password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/) || 'La contreña debe incluir al menos una mayúscula y un número.',
+        required: v => !!v || 'Campo obligatorio.',
+      }
+    }
   },
   methods: {
     llamarRegistrarse(){
@@ -79,6 +98,36 @@ export default {
     },
     llamarForo(){
       this.$router.push('/foro')
+    },
+    crearAsesor(){
+      this.axios.post('nuevo_asesor', this.asesor)
+      .then(res => {
+        this.asesor.nombres = ""
+        this.asesor.apellidos = ""
+        this.asesor.usuario = ""
+        this.asesor.email = ""
+        this.asesor.contraseña = ""
+        this.asesor.codigo_unico = ""
+        this.re_pass = ""
+        this.showAlert()
+        console.log(res.data)
+      })
+      .catch(e => {
+        console.log(e.response);
+      })
+      this.$router.push("/unete")
+    },
+  },
+  computed: {
+    re_passRule() {
+      return () => (this.usuario.contraseña === this.re_pass) || 'Las contraseñas no coinciden.'
+    }
+  },
+  beforeCreate(){
+    var auth = window.localStorage.getItem("auth")
+
+    if(auth === "ok"){
+      this.$router.push("/perfil")
     }
   },
 };
