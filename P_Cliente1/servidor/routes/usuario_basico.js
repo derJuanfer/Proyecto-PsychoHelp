@@ -27,13 +27,16 @@ router.get('/nuevo_usuario', async(req, res)=>{
   }
 });
 
-router.get('/nuevo_usuario/:usuario', async(req, res) => {
-  const usuario = req.params.usuario;
-  try{
-    const usuarioBD = await usuario_basico.findOne({usuario});
+router.get('/nuevo_usuario/:id', async(req, res)=>{
+  const _id=req.params.id;
+  try {
+    const usuarioBD= await usuario_basico.findOne({_id});
     res.json(usuarioBD);
-  } catch (error){
-    return res.status(400).json({mensaje: 'Ocurrió un error', error})
+  } catch (error) {
+    return res.status(500).json({
+      mensaje:'Ocurrio un error',
+      error
+    })
   }
 });
 

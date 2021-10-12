@@ -126,9 +126,78 @@
     </v-row>
     <br />
 
-    <div class="footer">
-      <h3 style="color: white"></h3>
-    </div>
+    <v-divider style = "margin-left: 5%; margin-right: 5%"></v-divider>
+    <h1 style="text-align: center; margin: 3%">Nuestro equipo de desarrollo</h1>
+    <v-hover>
+      <template v-slot:default="{ hover }">
+        <div style="margin: 3%" class="container pa-5">
+          <v-img
+            src="../assets/dev_Claudia.jpg"
+            max-height="15%"
+            max-width="15%"
+            :class="`elevation-${hover ? 24 : 10}`"
+            class="ma-6 float-start"
+            style="border-radius: 50%"
+          >
+          </v-img>
+          <h2 class="my-5 text-left">Claudia Mora</h2>
+          <v-divider style = "margin-left: 5%"></v-divider>
+          <p class="ma-5 text-left" style="font-weight: bold">Mi nombre es Claudia Mora, tengo 22 años, vivo en la ciudad de Bogotá,
+            soy estudiante de ingeniería de sistemas. Actualmente, trabajo implementando
+            un software libre para estructurar la mesa de ayuda de Locatel S.A.S.
+            PsychoHelp es un proyecto atractivo y útil ya que se enfoca en el apoyo
+            psicológico para aquellos usuarios que lo requieran sin tener la necesidad
+            de salir de casa.</p>
+        </div>
+      </template>
+    </v-hover>
+
+    <v-hover>
+      <template v-slot:default="{ hover }">
+        <div class="container pa-5">
+          <v-img
+            src="../assets/dev_Samuel.jpg"
+            max-height="15%"
+            max-width="15%"
+            :class="`elevation-${hover ? 24 : 10}`"
+            class="mt-6 ml-6 mb-6 float-end"
+            style="border-radius: 50%"
+          >
+          </v-img>
+          <h2 class="my-5 text-right">Samuel Cubillos</h2>
+          <v-divider style = "margin-right: 5%"></v-divider>
+          <p class="ma-5 text-right" style="font-weight: bold">Soy Samuel Santiago Cubillos tengo 17 años,
+          vivo en la ciudad de Cali. Actualmente me desempeño como aprendiz de Diseño multimedia,
+          éste proyecto me gustó bastante desde el momento en que lo planteamos ya que busca
+          brindar un espacio de ayuda útil para cualquier persona que pudiera necesitarlo.</p>
+        </div>
+      </template>
+    </v-hover>
+
+    <v-hover>
+      <template v-slot:default="{ hover }">
+        <div style="margin: 3%" class="container pa-5">
+          <v-img
+            src="../assets/dev_Fer.jpg"
+            max-height="15%"
+            max-width="15%"
+            :class="`elevation-${hover ? 24 : 10}`"
+            class="mr-6 ml-6 mb-6 mt-12 float-start"
+            style="border-radius: 50%"
+          >
+          </v-img>
+          <h2 class="my-5 text-left">Juan Fernando Quintero</h2>
+          <v-divider style = "margin-left: 5%"></v-divider>
+          <p class="ma-5 text-left" style="font-weight: bold">Me llamo Juan Fernando Quintero, tengo 21 años,
+            vivo en la ciudad de Cali, soy estudiante de física en la Universidad del Valle.
+            Pero trabajo como músico y gestor de proyectos sociales y culturales, sobre todo enfocados a la
+            recuperación de espacios para los jóvenes y niños. Ésta idea de proyecto significa mucho para mí,
+            pues fue planteado como un centro de ayuda para cualquier persona que no tuviera la oportunidad
+            de acceder a un servicio médico psicológico, siendo esta plataforma un espacio seguro para dialogar,
+            desahogarse y encontrar posibles soluciones; como todos tal vez en algún momento lo necesitamos.</p>
+        </div>
+      </template>
+    </v-hover>
   </div>
 </template>
 

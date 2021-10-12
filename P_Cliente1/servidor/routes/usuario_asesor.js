@@ -27,5 +27,18 @@ router.get('/nuevo_asesor', async(req, res)=>{
   }
 });
 
+router.get('/nuevo_asesor/:id', async(req, res)=>{
+  const _id=req.params.id;
+  try {
+    const asesorBD= await usuario_asesor.findOne({_id});
+    res.json(asesorBD);
+  } catch (error) {
+    return res.status(500).json({
+      mensaje:'Ocurrio un error',
+      error
+    })
+  }
+});
+
 //Exporta la configuración de express
 module.exports = router;
