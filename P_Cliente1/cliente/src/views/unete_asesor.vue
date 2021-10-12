@@ -68,6 +68,7 @@ export default {
               window.localStorage.setItem("auth", "ok")
               window.localStorage.setItem("asesor", "yes")
               window.localStorage.setItem("user", this.form.usuario)
+              window.localStorage.setItem("id", value._id)
 
               this.$router.go()
               // this.$router.push({path: "/perfil"})
