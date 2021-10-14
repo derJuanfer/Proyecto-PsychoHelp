@@ -21,13 +21,6 @@ mongoose.connect(uri, options).then(
 //Middleware
 app.use(morgan('tiny'));
 app.use(cors());
-app.use((req, res, next)=>{
- res.header("Access-Control-Allow-Origin", "*");
- res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, ContentType, Accept");
- res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
- res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
- next();
-});
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -37,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api', require('./routes/usuario_basico'));
 app.use('/api', require('./routes/usuario_asesor'));
 app.use('/api', require('./routes/crear_foro'));
+app.use('/api', require('./routes/comentar_foro'));
 
 //Middleware para Vue.js router modo history
 const history = require('connect-history-api-fallback');

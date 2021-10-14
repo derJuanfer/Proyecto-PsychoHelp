@@ -1,15 +1,15 @@
 import express from 'express';
 const router = express.Router();
 
-import crear_foro from '../models/crear_foro';
+import comentar_foro from '../models/comentar_foro';
 
 //Adición de usuario de un asesor
-router.post('/nuevo_foro', async(req, res)=>{
+router.post('/comentario', async(req, res)=>{
   const body = req.body;
 
   try{
-    const forosBD = await crear_foro.create(body);
-    res.status(200).json(forosBD);
+    const comentariosBD = await comentar_foro.create(body);
+    res.status(200).json(comentariosBD);
   } catch(error){
     return res.status(500).json({
       mensaje: 'Ocurrió un error',
@@ -18,10 +18,10 @@ router.post('/nuevo_foro', async(req, res)=>{
   }
 });
 
-router.get('/nuevo_foro', async(req, res)=>{
+router.get('/comentario', async(req, res)=>{
   try {
-   const forosBD = await crear_foro.find({})
-   res.json(forosBD);
+   const comentariosBD = await comentar_foro.find({})
+   res.json(comentariosBD);
   } catch (error) {
     console.log(error);
   }

@@ -40,5 +40,19 @@ router.get('/nuevo_usuario/:id', async(req, res)=>{
   }
 });
 
+router.put('/nuevo_usuario/:id', async(req, res)=>{
+  const _id=req.params.id;
+  const body = req.body;
+  try{
+    const usuarioBD = await usuario_basico.findByIdAndUpdate(_id, body, {new: true})
+    res.json(usuarioBD)
+  } catch(error){
+    return res.status(500).json({
+      mensaje: "Ocurrió un error.",
+      error
+    })
+  }
+})
+
 //Exporta la configuración de express
 module.exports = router;

@@ -1,12 +1,8 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
-const cforoSchema = new Schema({
-  titulo:{
-    type: String,
-    required: [true, 'Campo obligatorio.']
-  },
-  texto:{
+const comentarSchema = new Schema({
+  contenido:{
     type: String,
     required: [true, 'Campo obligatorio.']
   },
@@ -17,9 +13,13 @@ const cforoSchema = new Schema({
   usuario:{
     type: String,
     required: [true, 'Campo obligatorio.']
+  },
+  id_foro:{
+    type: String,
+    required: [true, 'Campo obligatorio.']
   }
 });
 
 //Conversión a modelo
-const crear_foro = mongoose.model('crear_foro', cforoSchema);
-export default crear_foro;
+const comentar_foro = mongoose.model('comentar_foro', comentarSchema);
+export default comentar_foro;
